@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Transfer Protocols - Student Guide</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    h2 {
+      color: #1976D2;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      color: #388E3C;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .info-box {
+      background: #E3F2FD;
+      border-left: 4px solid #1976D2;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+
+    .success-box {
+      background: #E8F5E9;
+      border-left: 4px solid #4CAF50;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+
+    .warning-box {
+      background: #FFF3E0;
+      border-left: 4px solid #FF9800;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      color: #d63384;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    .comparison-table th {
+      background: #667eea;
+      color: white;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .step-box {
+      background: #f0f0f0;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 5px;
+      border-left: 4px solid #667eea;
+    }
+
+    .step-box strong {
+      color: #667eea;
+    }
+
+    a {
+      color: #1976D2;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .simulator-link {
+      display: inline-block;
+      background: #667eea;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 6px;
+      margin: 10px 10px 10px 0;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .simulator-link:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      text-decoration: none;
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      color: #666;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>📚 Data Transfer Protocols - Interactive Learning Guide</h1>
+  <p class="subtitle">Understand Strobe Control and Handshaking with Interactive Simulators</p>
+
+  <div class="info-box">
+    <strong>📌 What You'll Learn:</strong>
+    <ul>
+      <li>How asynchronous data transfer works</li>
+      <li>Difference between Strobe Control and Handshaking</li>
+      <li>When to use each method</li>
+      <li>Real-world applications</li>
+    </ul>
+  </div>
+
+  <!-- Section 1: Introduction -->
+  <h2>1️⃣ Introduction to Asynchronous Data Transfer</h2>
+  
+  <p>When two independent units need to communicate, they must coordinate their timing. This is called <strong>asynchronous data transfer</strong> because they don't share a common timing signal.</p>
+
+  <p><strong>Why is this important?</strong></p>
+  <ul>
+    <li>Sender and receiver may operate at different speeds</li>
+    <li>They need to know when data is ready</li>
+    <li>They need to confirm data was received correctly</li>
+    <li>Used in USB, serial ports, printers, and network protocols</li>
+  </ul>
+
+  <!-- Section 2: Strobe Control -->
+  <h2>2️⃣ Strobe Control Method</h2>
+
+  <p><strong>How it works:</strong> The sender controls everything by sending a <em>strobe pulse</em> to indicate when data is valid.</p>
+
+  <h3>The Process:</h3>
+  <div class="step-box">
+    <strong>Step 1:</strong> Sender places data on the bus
+  </div>
+  <div class="step-box">
+    <strong>Step 2:</strong> Sender asserts STROBE pulse (signal goes HIGH)
+  </div>
+  <div class="step-box">
+    <strong>Step 3:</strong> Receiver detects the pulse
+  </div>
+  <div class="step-box">
+    <strong>Step 4:</strong> Receiver captures data while pulse is active
+  </div>
+  <div class="step-box">
+    <strong>Step 5:</strong> Sender releases strobe (signal goes LOW)
+  </div>
+
+  <div class="success-box">
+    <strong>✓ Advantages:</strong>
+    <ul>
+      <li>Simple - only 2 control signals needed</li>
+      <li>Fast - no back-and-forth communication</li>
+      <li>Good for high-speed parallel transfers</li>
+    </ul>
+  </div>
+
+  <div class="warning-box">
+    <strong>✗ Disadvantages:</strong>
+    <ul>
+      <li>No acknowledgment - sender doesn't know if receiver got the data</li>
+      <li>Lower reliability - no error checking</li>
+      <li>Sender assumes receiver timing</li>
+    </ul>
+  </div>
+
+  <h3>Real-World Example:</h3>
+  <p>Printer parallel ports (older printers) used strobe control. The computer (sender) would put data on the parallel port bus and send a strobe pulse to tell the printer to read it.</p>
+
+  <!-- Section 3: Handshaking -->
+  <h2>3️⃣ Handshaking Method</h2>
+
+  <p><strong>How it works:</strong> Both sender and receiver actively communicate. The receiver sends an <em>acknowledgment signal</em> to confirm it received the data correctly.</p>
+
+  <h3>The Process:</h3>
+  <div class="step-box">
+    <strong>Step 1:</strong> Sender places data on bus
+  </div>
+  <div class="step-box">
+    <strong>Step 2:</strong> Sender asserts DATA READY signal
+  </div>
+  <div class="step-box">
+    <strong>Step 3:</strong> Receiver detects DATA READY
+  </div>
+  <div class="step-box">
+    <strong>Step 4:</strong> Receiver reads the data
+  </div>
+  <div class="step-box">
+    <strong>Step 5:</strong> Receiver sends ACK (Acknowledge) signal
+  </div>
+  <div class="step-box">
+    <strong>Step 6:</strong> Sender receives ACK and knows transfer was successful
+  </div>
+  <div class="step-box">
+    <strong>Step 7:</strong> Both units release signals and are ready for next byte
+  </div>
+
+  <div class="success-box">
+    <strong>✓ Advantages:</strong>
+    <ul>
+      <li>Bidirectional - both units participate</li>
+      <li>More reliable - acknowledgment confirms receipt</li>
+      <li>Error checking possible</li>
+      <li>Works at different speeds</li>
+      <li>Used in modern protocols</li>
+    </ul>
+  </div>
+
+  <div class="warning-box">
+    <strong>✗ Disadvantages:</strong>
+    <ul>
+      <li>More complex - needs 3 control signals</li>
+      <li>Slower - must wait for acknowledgment</li>
+      <li>More overhead</li>
+    </ul>
+  </div>
+
+  <h3>Real-World Example:</h3>
+  <p>USB devices, serial communication (RS-232), and HTTP protocols all use handshaking-like mechanisms. When you connect a USB device, your computer and the device "handshake" to establish communication.</p>
+
+  <!-- Section 4: Comparison -->
+  <h2>4️⃣ Side-by-Side Comparison</h2>
+
+  <table class="comparison-table">
+    <tr>
+      <th>Feature</th>
+      <th>Strobe Control</th>
+      <th>Handshaking</th>
+    </tr>
+    <tr>
+      <td><strong>Number of Signals</strong></td>
+      <td>2 (Data bus + Strobe)</td>
+      <td>3 (Data bus + Ready + ACK)</td>
+    </tr>
+    <tr>
+      <td><strong>Direction</strong></td>
+      <td>One-way (sender only)</td>
+      <td>Bidirectional (both units)</td>
+    </tr>
+    <tr>
+      <td><strong>Acknowledgment</strong></td>
+      <td>❌ No</td>
+      <td>✅ Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Reliability</strong></td>
+      <td>Lower</td>
+      <td>Higher ⭐</td>
+    </tr>
+    <tr>
+      <td><strong>Speed</strong></td>
+      <td>Faster</td>
+      <td>Slower (waits for ACK)</td>
+    </tr>
+    <tr>
+      <td><strong>Complexity</strong></td>
+      <td>Simple</td>
+      <td>More complex</td>
+    </tr>
+    <tr>
+      <td><strong>Common Use</strong></td>
+      <td>Older systems, printers</td>
+      <td>USB, serial, modern protocols</td>
+    </tr>
+  </table>
+
+  <!-- Section 5: Try the Simulators -->
+  <h2>5️⃣ Try the Interactive Simulators</h2>
+
+  <p>Use these simulators to see both methods in action. You can enter your own binary data and watch the complete transfer process step-by-step.</p>
+
+  <h3>Strobe Control Simulator:</h3>
+  <p>See how the sender controls timing with a strobing pulse.</p>
+  <a href="strobe_control_simulator.html" class="simulator-link">📤 Open Strobe Control Simulator</a>
+
+  <h3>Handshaking Simulator:</h3>
+  <p>See how sender and receiver coordinate via acknowledgment signals.</p>
+  <a href="handshaking_simulator.html" class="simulator-link">🤝 Open Handshaking Simulator</a>
+
+  <div class="info-box">
+    <strong>💡 Try This Exercise:</strong>
+    <ol>
+      <li>Open the Strobe Control simulator</li>
+      <li>Enter these values and watch what happens:
+        <ul>
+          <li><code>10110101</code></li>
+          <li><code>11111111</code></li>
+          <li><code>00000000</code></li>
+        </ul>
+      </li>
+      <li>Notice how the sender controls everything</li>
+      <li>Now open Handshaking simulator</li>
+      <li>Notice the difference - receiver sends ACK back!</li>
+    </ol>
+  </div>
+
+  <!-- Section 6: Learning Objectives -->
+  <h2>6️⃣ Learning Objectives</h2>
+
+  <p>By the end of this exercise, you should understand:</p>
+  <ul>
+    <li>✅ How asynchronous data transfer works</li>
+    <li>✅ The difference between Strobe Control and Handshaking</li>
+    <li>✅ Why one-way control vs. bidirectional matters</li>
+    <li>✅ When acknowledgment is necessary</li>
+    <li>✅ Real-world applications of each method</li>
+    <li>✅ Trade-offs between simplicity and reliability</li>
+  </ul>
+
+  <!-- Section 7: Real-World Applications -->
+  <h2>7️⃣ Real-World Applications</h2>
+
+  <h3>Strobe Control Used In:</h3>
+  <ul>
+    <li>Older parallel printer ports</li>
+    <li>Legacy parallel port devices</li>
+    <li>Specialized industrial equipment</li>
+    <li>High-speed parallel data transfers where acknowledgment isn't critical</li>
+  </ul>
+
+  <h3>Handshaking Used In:</h3>
+  <ul>
+    <li><strong>USB devices</strong> - All modern USB communication</li>
+    <li><strong>Serial Communication</strong> - RS-232, UART protocols</li>
+    <li><strong>Network Protocols</strong> - TCP/IP, HTTP</li>
+    <li><strong>IoT Devices</strong> - MQTT (with publish/acknowledge)</li>
+    <li><strong>Bluetooth</strong> - Wireless device pairing</li>
+    <li><strong>File Transfers</strong> - FTP, SFTP</li>
+  </ul>
+
+  <div class="success-box">
+    <strong>🚀 Why Learn This?</strong>
+    <p>Understanding these fundamental protocols helps you:</p>
+    <ul>
+      <li>Debug communication issues</li>
+      <li>Design more reliable systems</li>
+      <li>Understand why USB works the way it does</li>
+      <li>Deploy IoT applications correctly</li>
+      <li>Work with microcontrollers (Arduino, Raspberry Pi)</li>
+      <li>Create your own communication protocols</li>
+    </ul>
+  </div>
+
+  <!-- Section 8: Questions & Discussion -->
+  <h2>8️⃣ Review Questions</h2>
+
+  <h3>Test Your Understanding:</h3>
+  <ol>
+    <li><strong>What is the main difference between Strobe Control and Handshaking?</strong>
+      <details>
+        <summary>Click to see answer</summary>
+        <p>Strobe Control is one-way (sender controls timing), while Handshaking is bidirectional (receiver sends acknowledgment back).</p>
+      </details>
+    </li>
+    
+    <li><strong>Why would you use Strobe Control over Handshaking?</strong>
+      <details>
+        <summary>Click to see answer</summary>
+        <p>Strobe Control is simpler and faster when you don't need confirmation that data was received. It uses only 2 control signals instead of 3.</p>
+      </details>
+    </li>
+    
+    <li><strong>In what situations is Handshaking essential?</strong>
+      <details>
+        <summary>Click to see answer</summary>
+        <p>Handshaking is essential when you need to guarantee data was received correctly, like in USB communication, file transfers, or network protocols.</p>
+      </details>
+    </li>
+    
+    <li><strong>How many steps are in the Handshaking process?</strong>
+      <details>
+        <summary>Click to see answer</summary>
+        <p>7 steps: prepare data, assert data ready, detect signal, read data, send ACK, receive ACK, and release signals.</p>
+      </details>
+    </li>
+  </ol>
+
+  <style>
+    details {
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    
+    details p {
+      margin: 10px 0 0 0;
+      color: #555;
+    }
+  </style>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p><strong>Course:</strong> Computer Organization & Architecture</p>
+    <p><strong>Topic:</strong> Asynchronous Data Transfer Protocols</p>
+    <p><strong>Created:</strong> Interactive Learning Module</p>
+    <p>📖 For more information, refer to your textbook Chapter on Data Transfer Protocols</p>
+  </div>
+</div>
+
+</body>
+</html>
